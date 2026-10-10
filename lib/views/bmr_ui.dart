@@ -195,7 +195,7 @@ class _BmrUIState extends State<BmrUI> {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.035,
+                  height: MediaQuery.of(context).size.height * 0.03,
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -206,10 +206,9 @@ class _BmrUIState extends State<BmrUI> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('กรุณากรอกข้อมูลให้ครบถ้วน'),
-                            color: Colors.red,
-                        },
-                          ),
-                      
+                          backgroundColor: Colors.red,
+                          duration: Duration(seconds: 2),
+                        ),
                       );
                       return;
                     }
@@ -218,14 +217,20 @@ class _BmrUIState extends State<BmrUI> {
                     int age = int.parse(agectrl.text);
                     double bmr = 0;
                     if (isMale == true) {
-                      bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+                      bmr = 88.362 +
+                          (13.397 * weight) +
+                          (4.799 * height) -
+                          (5.677 * age);
                     } else {
-                      bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+                      bmr = 447.593 +
+                          (9.247 * weight) +
+                          (3.098 * height) -
+                          (4.330 * age);
                     }
                     setState(() {
                       bmrvalue = bmr.toStringAsFixed(2);
                     });
-
+                  },
                   child: Text(
                     'คำนวณ BMR',
                     style: TextStyle(
@@ -284,7 +289,8 @@ class _BmrUIState extends State<BmrUI> {
                           style: TextStyle(
                               fontSize: 32,
                               color: Color.fromARGB(255, 255, 65, 0))),
-                      Text('', style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text('kcal/day',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.035,
                       ),
