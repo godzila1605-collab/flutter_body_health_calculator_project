@@ -11,7 +11,7 @@ class _BmrUIState extends State<BmrUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 238, 113, 255),
-    );
+        backgroundColor: const Color.fromARGB(255, 238, 113, 255),
+        body: SingleChildScrollView());
   }
 }
