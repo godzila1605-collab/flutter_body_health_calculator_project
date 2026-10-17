@@ -213,9 +213,44 @@ class _BmrUIState extends State<BmrUI> {
                     fillColor: const Color.fromARGB(255, 253, 253, 253),
                   ),
                 ),
-                SizedBox(height: 15.0),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    //แก้ code
+                    if (weightctrl.text.isEmpty ||
+                        heightctrl.text.isEmpty ||
+                        agectrl.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('กรุณากรอกข้อมูลให้ครบถ้วน'),
+                            color: Colors.red,
+                        },
+                          ),
+                      
+                      );
+                      return;
+                    }
+                    double weight = double.parse(weightctrl.text);
+                    double height = double.parse(heightctrl.text);
+                    int age = int.parse(agectrl.text);
+                    double bmr = 0;
+                    if (isMale == true) {
+                      bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+                    } else {
+                      bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+                    }
+                    setState(() {
+                      bmrvalue = bmr.toStringAsFixed(2);
+                    });
+
+                  child: Text(
+                    'คำนวณ BMR',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(
                       MediaQuery.of(context).size.width,
@@ -262,8 +297,10 @@ class _BmrUIState extends State<BmrUI> {
                           style: TextStyle(
                               fontSize: 32,
                               color: Color.fromARGB(255, 255, 65, 0))),
-                      Text('การแปรผล',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text('', style: TextStyle(fontWeight: FontWeight.bold)),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.035,
+                      ),
                     ],
                   ),
                 ),
